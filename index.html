@@ -42,66 +42,80 @@
 
         // Fonction pour déplacer le bouton NON partout
         function moveButton() {
+            const padding = 12;
 
-            const maxX = window.innerWidth - noBtn.offsetWidth;
-            const maxY = window.innerHeight - noBtn.offsetHeight;
+            // bornes sûres (évite les valeurs négatives)
+            const maxX = Math.max(padding, window.innerWidth - noBtn.offsetWidth - padding);
+            const maxY = Math.max(padding, window.innerHeight - noBtn.offsetHeight - padding);
 
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
+            const randomX = padding + Math.random() * (maxX - padding);
+            const randomY = padding + Math.random() * (maxY - padding);
 
-            noBtn.style.position = "absolute";
+            noBtn.style.position = "fixed"; // mieux sur mobile
             noBtn.style.left = randomX + "px";
             noBtn.style.top = randomY + "px";
 
-            // agrandir le bouton OUI (version smooth)
-            yesScale += 0.15;
+            // OUI grossit fort mais avec limite
+            yesScale = Math.min(yesScale + 0.18, 3.2);
             yesBtn.style.transform = `scale(${yesScale})`;
 
-            // petit upgrade : effet glow romantique
+            // glow romantique
             yesBtn.style.boxShadow = "0 0 25px rgba(255, 0, 80, 0.7)";
 
-
-            // changer message
             message.textContent = messages[i % messages.length];
             i++;
         }
 
-        // fuite dès qu'elle approche la souris
+
+        // Desktop : fuite dès qu'elle approche la souris
         noBtn.addEventListener("mouseenter", moveButton);
+
+        // Mobile : fuite dès qu'elle essaie de toucher
+        noBtn.addEventListener("touchstart", (e) => {
+            e.preventDefault();     // évite le "vrai" click sur mobile
+            moveButton();
+        }, { passive: false });
+
+        // Fallback : si elle arrive à cliquer quand même
+        noBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            moveButton();
+        });
 
         // clic sur OUI = écran final
         yesBtn.addEventListener("click", () => {
             document.body.innerHTML = `
-        <div class="final">
-            <h1>❤️ Merci d’avoir cliqué sur oui ❤️</h1>
+    <div class="final">
+      <h1>❤️ Merci d’avoir cliqué sur oui ❤️</h1>
 
-            <p class="love-text">
-                Je voulais juste te dire quelque chose d’honnête.
-            </p>
+      <p class="love-text">
+        Je voulais juste te dire quelque chose d’honnête.
+      </p>
 
-            <p class="love-text">
-                J'sais que la distance n’est pas toujours facile.<br>
-                Il y a des moments où j’aimerais juste pouvoir être à côté de toi,<br>
-                te voir, te prendre dans mes bras, partager des choses simples.<br>
-                Et parfois je suis désolé si ce n’est pas toujours simple à vivre.<br>
-                <br><br>
-                Mais malgré ça, je veux que tu saches à quel point tu comptes pour moi.
-                <br><br>
-                Tu es une personne incroyable.<br>
-                Tu es belle, vraiment.. pas seulement physiquement,
-                mais dans ta façon d’être, dans ton sourire,<br>
-                dans ta façon de me faire sentir bien.
-                <br><br>
-                Même loin, tu rends mes journées meilleures.<br>
-                Et je suis vraiment heureux de t’avoir dans ma vie.<br>
-            </p>
+      <p class="love-text">
+        J'sais que la distance n’est pas toujours facile.<br>
+        Il y a des moments où j’aimerais juste pouvoir être à côté de toi,<br>
+        te voir, te prendre dans mes bras, partager des choses simples.<br>
+        Et parfois je suis désolé si ce n’est pas toujours simple à vivre.<br>
+        <br><br>
+        Mais malgré ça, je veux que tu saches à quel point tu comptes pour moi.
+        <br><br>
+        Tu es une personne incroyable.<br>
+        Tu es belle, vraiment.. pas seulement physiquement,
+        mais dans ta façon d’être, dans ton sourire,<br>
+        dans ta façon de me faire sentir bien.
+        <br><br>
+        Même loin, tu rends mes journées meilleures.<br>
+        Et je suis vraiment heureux de t’avoir dans ma vie.<br>
+      </p>
 
-            <p class="love-text">
-                Je t’aime (MA) petite princesse. ❤️
-            </p>
-        </div>
-    `;
+      <p class="love-text">
+        Je t’aime (MA) petite princesse. ❤️
+      </p>
+    </div>
+  `;
         });
+
 
     </script>
 
