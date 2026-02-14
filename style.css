@@ -10,14 +10,16 @@ body {
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-
-    /* Thème rouge */
     background: linear-gradient(135deg, #8b0000, #ff1e56, #ff4d6d);
 
-    overflow: hidden;
     padding: 16px;
-    /* important sur mobile */
+
+    /* ✅ autorise le scroll vertical sur mobile */
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
+
 
 /* Carte centrale */
 .container {
@@ -95,6 +97,8 @@ button {
     width: min(780px, 100%);
     padding: 24px;
     animation: fadeIn 0.9s ease;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
 }
 
 .final h1 {
