@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #8b0000, #ff1e56, #ff4d6d);
+    overflow: hidden;
+}
+
+/* Carte centrale */
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 45px;
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #b3002d;
+    margin-bottom: 15px;
+}
+
+#message {
+    color: #661010;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+/* Boutons */
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+button {
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#yesBtn {
+    background: #ff003c;
+    color: white;
+}
+
+#yesBtn:hover {
+    transform: scale(1.12);
+}
+
+/* bouton NON */
+#noBtn {
+    background: #ffd6d6;
+    color: #900;
+}
+
+/* écran final */
+.final {
+    text-align: center;
+    color: white;
+}
+
+.final h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+.final {
+    text-align: center;
+    color: white;
+    max-width: 700px;
+    padding: 40px;
+    animation: fadeIn 1.5s ease;
+}
+
+.final h1 {
+    font-size: 3rem;
+    margin-bottom: 25px;
+}
+
+.love-text {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#yesBtn {
+    background: #ff003c;
+    color: white;
+    transition: transform 0.25s ease;
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Valentine ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>❤️ Veux-tu être ma Valentine Louise ? ❤️</h1>
+
+        <p id="message">Choisis avec ton cœur 😌</p>
+
+        <div class="buttons">
+            <button id="yesBtn">Oui ❤️</button>
+            <button id="noBtn">Non 😅</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const message = document.getElementById("message");
+
+        const messages = [
+            "Il essaye de s'échapper 😅​",
+            "T'es sérieuse là ? 😳",
+            "Nan mais réfléchis 🤨",
+            "La vie fait attention j'te laisse encore quelque chance 😤",
+            "Je savais que tu m'aimais pas..🥺​",
+            "Bon… clique sur OUI ❤️"
+        ];
+
+        let i = 0;
+        let yesScale = 1;
+
+
+        // Fonction pour déplacer le bouton NON partout
+        function moveButton() {
+
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noBtn.style.position = "absolute";
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+
+            // agrandir le bouton OUI (version smooth)
+            yesScale += 0.15;
+            yesBtn.style.transform = `scale(${yesScale})`;
+
+            // petit upgrade : effet glow romantique
+            yesBtn.style.boxShadow = "0 0 25px rgba(255, 0, 80, 0.7)";
+
+
+            // changer message
+            message.textContent = messages[i % messages.length];
+            i++;
+        }
+
+        // fuite dès qu'elle approche la souris
+        noBtn.addEventListener("mouseenter", moveButton);
+
+        // clic sur OUI = écran final
+        yesBtn.addEventListener("click", () => {
+            document.body.innerHTML = `
+        <div class="final">
+            <h1>❤️ Merci d’avoir cliqué sur oui ❤️</h1>
+
+            <p class="love-text">
+                Je voulais juste te dire quelque chose d’honnête.
+            </p>
+
+            <p class="love-text">
+                J'sais que la distance n’est pas toujours facile.<br>
+                Il y a des moments où j’aimerais juste pouvoir être à côté de toi,<br>
+                te voir, te prendre dans mes bras, partager des choses simples.<br>
+                Et parfois je suis désolé si ce n’est pas toujours simple à vivre.<br>
+                <br><br>
+                Mais malgré ça, je veux que tu saches à quel point tu comptes pour moi.
+                <br><br>
+                Tu es une personne incroyable.<br>
+                Tu es belle, vraiment.. pas seulement physiquement,
+                mais dans ta façon d’être, dans ton sourire,<br>
+                dans ta façon de me faire sentir bien.
+                <br><br>
+                Même loin, tu rends mes journées meilleures.<br>
+                Et je suis vraiment heureux de t’avoir dans ma vie.<br>
+            </p>
+
+            <p class="love-text">
+                Je t’aime (MA) petite princesse. ❤️
+            </p>
+        </div>
+    `;
+        });
+
+    </script>
+
+</body>
+
+</html>
