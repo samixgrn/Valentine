@@ -1,109 +1,121 @@
+/* Base */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
+
+    /* Thème rouge */
     background: linear-gradient(135deg, #8b0000, #ff1e56, #ff4d6d);
+
     overflow: hidden;
+    padding: 16px;
+    /* important sur mobile */
 }
 
 /* Carte centrale */
 .container {
+    width: min(720px, 100%);
     text-align: center;
     background: rgba(255, 255, 255, 0.95);
-    padding: 45px;
-    border-radius: 25px;
+    padding: clamp(18px, 4vw, 42px);
+    border-radius: 22px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Textes */
 h1 {
     color: #b3002d;
-    margin-bottom: 15px;
+    margin: 0 0 12px 0;
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    line-height: 1.2;
 }
 
 #message {
     color: #661010;
-    font-size: 1.2rem;
-    margin-bottom: 25px;
+    margin: 0 0 18px 0;
+    font-size: clamp(1rem, 3.6vw, 1.2rem);
 }
 
 /* Boutons */
 .buttons {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 button {
     border: none;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-size: 1.1rem;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 1.05rem;
     cursor: pointer;
-    transition: 0.2s;
+
+    /* rendu plus smooth pour le scale */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #yesBtn {
     background: #ff003c;
     color: white;
+    transform-origin: center;
 }
 
-#yesBtn:hover {
-    transform: scale(1.12);
-}
-
-/* bouton NON */
 #noBtn {
     background: #ffd6d6;
     color: #900;
 }
 
-/* écran final */
+/* Sur petits écrans : boutons en colonne */
+@media (max-width: 420px) {
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Page finale */
 .final {
     text-align: center;
     color: white;
+    width: min(780px, 100%);
+    padding: 24px;
+    animation: fadeIn 0.9s ease;
 }
 
 .final h1 {
-    font-size: 4rem;
-    margin-bottom: 10px;
-}
-
-.final {
-    text-align: center;
-    color: white;
-    max-width: 700px;
-    padding: 40px;
-    animation: fadeIn 1.5s ease;
-}
-
-.final h1 {
-    font-size: 3rem;
-    margin-bottom: 25px;
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    margin: 0 0 16px 0;
 }
 
 .love-text {
-    font-size: 1.3rem;
+    font-size: clamp(1rem, 3.8vw, 1.25rem);
     line-height: 1.7;
-    margin-bottom: 20px;
+    margin: 0 0 14px 0;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(15px);
+        transform: translateY(12px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-#yesBtn {
-    background: #ff003c;
-    color: white;
-    transition: transform 0.25s ease;
 }
